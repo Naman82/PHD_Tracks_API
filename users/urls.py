@@ -4,6 +4,7 @@ from .views import *
 
 
 urlpatterns = [
+    path('',indexView.as_view(),name="indexView"),
     path('register/user/',userRegistrationView.as_view(),name="userRegistrationView"),
     path('register/admin/',adminRegisterationView.as_view(),name="adminRegisterationView"),
     path('login/',loginView.as_view(),name="loginView"),
@@ -27,6 +28,4 @@ urlpatterns = [
     path('form4E/user/',form4EView.as_view(),name="Form4EView"),
     path('form5/user/',form5View.as_view(),name="Form5View"),
     path('form6/user/',form6View.as_view(),name="Form6View"),
-
-
 ]

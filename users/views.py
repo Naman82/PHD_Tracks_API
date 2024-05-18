@@ -10,7 +10,12 @@ from .models import *
 from .serializers import *
 from django.utils import timezone
         
-
+class indexView(APIView):
+    def get(self,request):
+        try:
+            return send_response(result=True, message="Welcome to the PHD Tracks API")
+        except Exception as e:
+            return send_response(result=False, message=str(e))
 
 
 class userRegistrationView(APIView):
