@@ -443,10 +443,11 @@ class form3CView(APIView):
             branch = request.data.get('branch', None)
             rollno = request.data.get('rollno', None)
             topic_of_talk = request.data.get('topic_of_talk', None)
+            progress = request.data.get('progress', None)
             committees = request.data.get('committees', [])
 
             
-            if not name or not date_of_seminar or not branch or not rollno or not topic_of_talk or not committees:
+            if not name or not date_of_seminar or not branch or not rollno or not topic_of_talk or not committees or not progress:
                 return send_response(result=False, message="Empty Fields")
             
             form3c = Form3C.objects.create(
@@ -455,7 +456,8 @@ class form3CView(APIView):
                 date_of_seminar=date_of_seminar,
                 branch=branch,
                 rollno=rollno,
-                topic_of_talk=topic_of_talk
+                topic_of_talk=topic_of_talk,
+                progress=progress
             )
 
 

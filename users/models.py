@@ -154,6 +154,7 @@ class Form3C(models.Model):
     branch = models.CharField(max_length=255)
     rollno = models.CharField(max_length=255)
     topic_of_talk = models.TextField()
+    progress = models.CharField(max_length=255)
     committee = models.ManyToManyField(Committee)
 
 
