@@ -317,16 +317,16 @@ class form3AView(APIView):
             # Extract form data from request
             user = request.user
             name = request.data.get('name', None)
-            semainar_date = request.data.get('semainar_date', None)
+            seminar_date = request.data.get('seminar_date', None)
 
-            if not name or not semainar_date :
+            if not name or not seminar_date :
                 return send_response(result=False, message="Empty Fields")
             
             # Create Form1A instance
             form3a = Form3A.objects.create(
                 user=user,
                 name=name,
-                semainar_date=semainar_date,
+                seminar_date=seminar_date,
             )
 
             # # Create Education instances and link them to Form1A
@@ -372,7 +372,7 @@ class form3BView(APIView):
             institute_stay_date_from = request.data.get('institute_stay_date_from', None)
             institute_stay_date_to = request.data.get('institute_stay_date_to', None)
 
-            # if not name or not semainar_date :
+            # if not name or not seminar_date :
             #     return send_response(result=False, message="Empty Fields")
             
             if not name or not semester or not session or not rollno or not category or not date_of_enrolment or not department or not is_registration_completed or not permanent_address or not fees_date or not area_of_research or not institute_stay_date_from or not institute_stay_date_to:
