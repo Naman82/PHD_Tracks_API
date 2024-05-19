@@ -24,12 +24,13 @@ class userRegistrationView(APIView):
         try:
             first_name = request.data.get('first_name', None)
             last_name = request.data.get('last_name', None)
+            department = request.data.get('department', None)
             email = request.data.get('email', None)
             password = request.data.get('password', None)
             if first_name is not None and last_name is not None and email is not None and password is not None:
                 user = User.objects.filter(email=email)
                 if not user.exists():
-                    new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password)
+                    new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department)
                     return send_response(result=True, message="User created successfully")
                 else:
                     return send_response(result=False, message="User with this email already exists")
@@ -123,8 +124,10 @@ class userView(APIView):
             if not User.objects.filter(pk=pk).exists():
                 return send_response(result=False, message="User does not exist")
             user = User.objects.get(pk=pk)
-            if 'profile_pic' in request.data:
-                user.profile_pic = request.data.get('profile_pic')
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if 'designation' in request.data:
+                user.designation = request.data.get('designation')
             if 'first_name' in request.data:
                 user.first_name = request.data.get('first_name')
             if 'last_name' in request.data:
@@ -375,7 +378,7 @@ class form3BView(APIView):
             # if not name or not seminar_date :
             #     return send_response(result=False, message="Empty Fields")
             
-            if not name or not semester or not session or not rollno or not category or not date_of_enrolment or not department or not is_registration_completed or not permanent_address or not fees_date or not area_of_research or not institute_stay_date_from or not institute_stay_date_to:
+            if not name or not semester or not session or not rollno or not category or not date_of_enrolment or not department or not permanent_address or not fees_date or not area_of_research or not institute_stay_date_from or not institute_stay_date_to:
                 return send_response(result=False, message="Empty Fields")
             
             form3b = Form3B.objects.create(
@@ -729,7 +732,7 @@ class form6View(APIView):
             supervisor = request.data.get('supervisor', None)
             number_of_people = request.data.get('number_of_people', None)
             performance = request.data.get('performance', None)
-            comments = request.data.get('comments', None)
+            comments = request.data.get('comments', [])
             committees = request.data.get('committees', None)
             
             if not name or not date_of_viva_voce or not rollno or not department or not title_of_thesis or not degree or not indian_examiner or not foreign_examiner or not supervisor or not number_of_people or not performance or not comments or not committees:
@@ -747,7 +750,6 @@ class form6View(APIView):
                 supervisor=supervisor,
                 number_of_people=number_of_people,
                 performance=performance,
-                comments=comments
             )
 
             for committee in committees:
@@ -755,6 +757,14 @@ class form6View(APIView):
                 if serializer.is_valid():
                     committee_instance = serializer.save()
                     form6.committee.add(committee_instance)
+                else:
+                    return send_response(result=False, message=serializer.errors)
+                
+            for comment in comments:
+                serializer = CommentSerializer(data=comment)
+                if serializer.is_valid():
+                    comment_instance = serializer.save()
+                    form6.comment.add(comment_instance)
                 else:
                     return send_response(result=False, message=serializer.errors)
                 
