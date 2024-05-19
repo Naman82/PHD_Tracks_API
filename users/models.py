@@ -179,9 +179,12 @@ class Examiner(models.Model):
     name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255)
     institute = models.TextField()
+    priority = models.IntegerField(validators=[MaxValueValidator(100)])
+    is_assigned = models.BooleanField(default=False)
     areas_of_interest = models.TextField()
     address = models.TextField()
     phone = models.CharField(max_length=13)
+    is_indian = models.BooleanField(default=True)
     email = models.EmailField()
 
 class Form4C(models.Model):

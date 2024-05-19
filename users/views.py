@@ -151,11 +151,22 @@ class examinerView(APIView):
 
     def get(self, request):
         try:
-            examiners = Examiner.objects.all()
+            examiners = Examiner.objects.filter(is_assigned=False)
             return send_response(result=True, data=ExaminerSerializer(examiners, many=True).data)
         except Exception as e:
             return send_response(result=False, message=str(e))
-
+        
+    def patch(self,request,pk):
+        try:
+            if not Examiner.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="Examiner does not exist")
+            examiner = Examiner.objects.get(pk=pk)
+            if 'is_assigned' in request.data:
+                examiner.is_assigned = request.data.get('is_assigned')
+            examiner.save()
+            return send_response(result=True, message="Examiner updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))
         
 class form1AView(APIView):
     permission_classes = [IsAuthenticated]

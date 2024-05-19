@@ -11,6 +11,7 @@ urlpatterns = [
     path('token-refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
     path('examiner/list/',examinerView.as_view(),name='examinerView'),
+    path('examiner/<int:pk>/update/',examinerView.as_view(),name='examinerView-update'),
     path('user/list/',userView.as_view(),name='userView-list'),
     path('user/<int:pk>/',userView.as_view(),name='userView-detail'),
     path('user/<int:pk>/update/',userView.as_view(),name='userView-update'),
