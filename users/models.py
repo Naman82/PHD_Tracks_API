@@ -53,8 +53,8 @@ class Education(models.Model):
     standard = models.CharField(max_length=255)
     university = models.TextField()
     degree = models.TextField()
-    year_of_passing = models.IntegerField()
-    cgpa = models.FloatField()
+    year_of_passing = models.TextField()
+    cgpa = models.TextField()
     subjects = models.TextField()
 
     def __str__(self):
