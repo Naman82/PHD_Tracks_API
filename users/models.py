@@ -19,6 +19,8 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     profile_pic = models.ImageField(upload_to=get_update_filename, default='uploads/user/profile/default_profile.jpg')
     area_of_research = models.TextField(null=True,blank=True)
+    department = models.CharField(max_length=255,null=True,blank=True)
+    designation = models.CharField(max_length=255,null=True,blank=True)
     supervisor = models.CharField(max_length=255,null=True,blank=True)
     status = models.CharField(max_length=255,null=True,blank=True)
     thesis_url = models.URLField(null=True,blank=True)
@@ -228,6 +230,11 @@ class Form5(models.Model):
     professor = models.CharField(max_length=255)
 
 
+class Comment(models.Model):
+    comment = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
 class Form6(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
@@ -242,6 +249,6 @@ class Form6(models.Model):
     supervisor = models.TextField()
     number_of_people = models.IntegerField()
     performance = models.TextField()
-    comments = models.TextField()
+    comment = models.ManyToManyField(Comment)
     committee = committee = models.ManyToManyField(Committee)
 

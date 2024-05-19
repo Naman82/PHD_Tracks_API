@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import (
-    User, Education, Form1A, Course, Form1B, Form2, Form3A, Form3B, Committee, 
+    User, Education, Form1A, Course, Form1B, Form2, Form3A, Form3B, Committee, Comment,
     Form3C, Form4A, Form4B, Examiner, Form4C, Form4D, Form4E, Form5, Form6
 )
 
@@ -109,7 +109,13 @@ class Form5Serializer(serializers.ModelSerializer):
         model = Form5
         fields = '__all__'
 
+class CommentSerializer(serializers.Serializer):
+    class Meta:
+        model = Comment
+        fields = '__all__'   
+
 class Form6Serializer(serializers.ModelSerializer):
+    comment = serializers.CharField(required=False)
     committee = CommitteeSerializer(many=True, read_only=True)
 
     class Meta:
