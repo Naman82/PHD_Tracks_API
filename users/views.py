@@ -669,23 +669,23 @@ class form4AView(APIView):
             # Extract form data from request
             user = request.user
             name = request.data.get('name', None)
-            date_of_seminar = request.data.get('date_of_seminar', None)
-            branch = request.data.get('branch', None)
+            # date_of_seminar = request.data.get('date_of_seminar', None)
+            department = request.data.get('department', None)
             rollno = request.data.get('rollno', None)
-            topic_of_talk = request.data.get('topic_of_talk', None)
+            # topic_of_talk = request.data.get('topic_of_talk', None)
             committees = request.data.get('committees', [])
 
             
-            if not name or not date_of_seminar or not branch or not rollno or not topic_of_talk or not committees:
+            if not name or not department or not rollno or not committees:
                 return send_response(result=False, message="Empty Fields")
             
             form4a = Form4A.objects.create(
                 user=user,
                 name=name,
-                date_of_seminar=date_of_seminar,
-                branch=branch,
+                # date_of_seminar=date_of_seminar,
+                department=department,
                 rollno=rollno,
-                topic_of_talk=topic_of_talk
+                # topic_of_talk=topic_of_talk
             )
 
 
