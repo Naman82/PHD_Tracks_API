@@ -170,7 +170,25 @@ class examinerView(APIView):
         
 class form1AView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form1A details for the user
+            form1a_details = Form1A.objects.filter(user=user).first()
+            
+            if not form1a_details:
+                return send_response(result=False, message="Form1A details not found for this user")
+            
+            # Serialize the form1a details
+            form1a_data = Form1ASerializer(form1a_details).data
+            
+            return send_response(result=True, data=form1a_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -584,9 +602,9 @@ class form4CView(APIView):
             supervisor = request.data.get('supervisor', None)
             indian_examiner_id = request.data.get('indian_examiner_id', None)
             foreign_examiner_id = request.data.get('foreign_examiner_id', None)
-            committees = request.data.get('committees', [])
+            committee = request.data.get('committee', [])
 
-            if not name or not rollno or not department or not date_of_registeration or not title_of_thesis or not degree or not supervisor or not indian_examiner_id or not foreign_examiner_id or not committees:
+            if not name or not rollno or not department or not date_of_registeration or not title_of_thesis or not degree or not supervisor or not indian_examiner_id or not foreign_examiner_id or not committee:
                 return send_response(result=False, message="Empty Fields")
             
             if not Examiner.objects.filter(pk=indian_examiner_id).exists() or not Examiner.objects.filter(pk=foreign_examiner_id).exists():
@@ -610,11 +628,11 @@ class form4CView(APIView):
 
 
             # Create Education instances and link them to Form1A
-            for committee in committees:
-                serializer = CommitteeSerializer(data=committee)
+            for c in committee:
+                serializer = CommitteeSerializer(data=c)
                 if serializer.is_valid():
-                    committee_instance = serializer.save()
-                    form4c.committee.add(committee_instance)
+                    c_instance = serializer.save()
+                    form4c.committee.add(c_instance)
                 else:
                     return send_response(result=False, message=serializer.errors)
                 
@@ -695,12 +713,8 @@ class form5View(APIView):
             is_modification = request.data.get('is_modification', None)
             is_modification_final = request.data.get('is_modification_final', None)
             is_rejected = request.data.get('is_rejected', None)
-            place = request.data.get('place', None)
-            name_of_examiner = request.data.get('name_of_examiner', None)
-            affliation = request.data.get('affliation', None)
-            professor = request.data.get('professor', None)
             
-            if not name or not rollno or not title_of_thesis or not is_academic_standard or not is_viva or not is_modification or not is_modification_final or not is_rejected or not place or not name_of_examiner or not affliation or not professor:
+            if not name or not rollno or not title_of_thesis :
                 return send_response(result=False, message="Empty Fields")
             
             form5 = Form5.objects.create(
@@ -713,10 +727,6 @@ class form5View(APIView):
                 is_modification=is_modification,
                 is_modification_final=is_modification_final,
                 is_rejected=is_rejected,
-                place=place,
-                name_of_examiner=name_of_examiner,
-                affliation=affliation,
-                professor=professor
             )
             form5.save()
 

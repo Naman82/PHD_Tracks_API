@@ -227,11 +227,7 @@ class Form5(models.Model):
     is_modification = models.BooleanField(default=False)
     is_modification_final = models.BooleanField(default=False)
     is_rejected = models.BooleanField(default=False)
-    place = models.CharField(max_length=255)
-    date = models.DateField(auto_now_add=True)
-    name_of_examiner = models.CharField(max_length=255)
-    affliation = models.TextField()
-    professor = models.CharField(max_length=255)
+
 
 
 class Comment(models.Model):

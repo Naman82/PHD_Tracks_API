@@ -16,6 +16,7 @@ urlpatterns = [
     path('user/<int:pk>/',userView.as_view(),name='userView-detail'),
     path('user/<int:pk>/update/',userView.as_view(),name='userView-update'),
 
+    path('form1A/user/<int:pk>/',form1AView.as_view(),name="Form1AView-Get"),
     path('form1A/user/',form1AView.as_view(),name="Form1AView"),
     path('form1B/user/',form1BView.as_view(),name="Form1BView"),
     path('form2/user/',form2View.as_view(),name="Form2View"),
