@@ -26,6 +26,7 @@ class Form1ASerializer(serializers.ModelSerializer):
     class Meta:
         model = Form1A
         fields = '__all__'
+        depth = 1
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
@@ -65,6 +66,7 @@ class Form3CSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form3C
         fields = '__all__'
+        depth = 1
 
 class Form4ASerializer(serializers.ModelSerializer):
     committee = CommitteeSerializer(many=True, read_only=True)
@@ -72,6 +74,7 @@ class Form4ASerializer(serializers.ModelSerializer):
     class Meta:
         model = Form4A
         fields = '__all__'
+        depth = 1
 
 class Form4BSerializer(serializers.ModelSerializer):
     committee = CommitteeSerializer(many=True, read_only=True)
@@ -79,6 +82,7 @@ class Form4BSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form4B
         fields = '__all__'
+        depth = 1
 
 class ExaminerSerializer(serializers.ModelSerializer):
     class Meta:
@@ -93,6 +97,7 @@ class Form4CSerializer(serializers.ModelSerializer):
     class Meta:
         model = Form4C
         fields = '__all__'
+        depth = 1
 
 class Form4DSerializer(serializers.ModelSerializer):
     class Meta:
@@ -121,3 +126,4 @@ class Form6Serializer(serializers.ModelSerializer):
     class Meta:
         model = Form6
         fields = '__all__'
+        depth = 1
