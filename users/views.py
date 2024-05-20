@@ -207,8 +207,11 @@ class examinerView(APIView):
 
     def get(self, request):
         try:
-            examiners = Examiner.objects.filter(is_assigned=False)
-            return send_response(result=True, data=ExaminerSerializer(examiners, many=True).data)
+            # examiners = Examiner.objects.filter(is_assigned=False)
+            indians = Examiner.objects.filter(is_indian=True)
+            foreigners = Examiner.objects.filter(is_indian=False)
+            return send_response(result=True, data={'indian': ExaminerSerializer(indians, many=True).data, 'foreign': ExaminerSerializer(foreigners, many=True).data})
+            # return send_response(result=True, data=ExaminerSerializer(examiners, many=True).data)
         except Exception as e:
             return send_response(result=False, message=str(e))
         
