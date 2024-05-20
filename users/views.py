@@ -359,7 +359,7 @@ class form2View(APIView):
             date_of_joining = request.data.get('date_of_joining', None)
             work_done = request.data.get('work_done', None)
             nature_of_work = request.data.get('nature_of_work', None)
-            remarks_by_supervisor = request.data.get('remarks_by_supervisor', [])
+            remarks_by_supervisor = request.data.get('remarks_by_supervisor', None)
 
             if not department or not name or not rollno or not date_of_joining or not work_done or not nature_of_work or not remarks_by_supervisor or not month_year:
                 return send_response(result=False, message="Empty Fields")
@@ -374,6 +374,7 @@ class form2View(APIView):
                 date_of_joining=date_of_joining,
                 work_done=work_done,
                 nature_of_work=nature_of_work,
+                remarks_by_supervisor=remarks_by_supervisor
             )
 
             # # Create Education instances and link them to Form1A
