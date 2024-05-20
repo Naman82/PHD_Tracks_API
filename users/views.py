@@ -806,9 +806,9 @@ class form4CView(APIView):
             supervisor = request.data.get('supervisor', None)
             indian_examiner_id = request.data.get('indian_examiner_id', None)
             foreign_examiner_id = request.data.get('foreign_examiner_id', None)
-            committee = request.data.get('committee', [])
+            committees = request.data.get('committees', [])
 
-            if not name or not rollno or not department or not date_of_registeration or not title_of_thesis or not degree or not supervisor or not indian_examiner_id or not foreign_examiner_id or not committee:
+            if not name or not rollno or not department or not date_of_registeration or not title_of_thesis or not degree or not supervisor or not indian_examiner_id or not foreign_examiner_id or not committees:
                 return send_response(result=False, message="Empty Fields")
             
             if not Examiner.objects.filter(pk=indian_examiner_id).exists() or not Examiner.objects.filter(pk=foreign_examiner_id).exists():
@@ -832,7 +832,7 @@ class form4CView(APIView):
 
 
             # Create Education instances and link them to Form1A
-            for c in committee:
+            for c in committees:
                 serializer = CommitteeSerializer(data=c)
                 if serializer.is_valid():
                     c_instance = serializer.save()
