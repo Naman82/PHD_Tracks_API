@@ -240,7 +240,25 @@ class form1AView(APIView):
         
 class form1BView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form1b details for the user
+            form1b_details = Form1B.objects.filter(user=user).first()
+            
+            if not form1b_details:
+                return send_response(result=False, message="Form1B details not found for this user")
+            
+            # Serialize the form1b details
+            form1b_data = Form1BSerializer(form1b_details).data
+            
+            return send_response(result=True, data=form1b_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -291,7 +309,25 @@ class form1BView(APIView):
 
 class form2View(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form2 details for the user
+            form2_details = Form2.objects.filter(user=user).first()
+            
+            if not form2_details:
+                return send_response(result=False, message="Form2 details not found for this user")
+            
+            # Serialize the form2 details
+            form2_data = Form2Serializer(form2_details).data
+            
+            return send_response(result=True, data=form2_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -343,7 +379,25 @@ class form2View(APIView):
         
 class form3AView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form3A details for the user
+            form3a_details = Form3A.objects.filter(user=user).first()
+            
+            if not form3a_details:
+                return send_response(result=False, message="Form3A details not found for this user")
+            
+            # Serialize the form1a details
+            form3a_data = Form3ASerializer(form3a_details).data
+            
+            return send_response(result=True, data=form3a_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -385,7 +439,25 @@ class form3AView(APIView):
 
 class form3BView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form3b details for the user
+            form3b_details = Form3B.objects.filter(user=user).first()
+            
+            if not form3b_details:
+                return send_response(result=False, message="Form3B details not found for this user")
+            
+            # Serialize the form1b details
+            form3b_data = Form3BSerializer(form3b_details).data
+            
+            return send_response(result=True, data=form3b_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -451,7 +523,25 @@ class form3BView(APIView):
 
 class form3CView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form3c details for the user
+            form3c_details = Form3C.objects.filter(user=user).first()
+            
+            if not form3c_details:
+                return send_response(result=False, message="Form3C details not found for this user")
+            
+            # Serialize the form3c details
+            form3c_data = Form3CSerializer(form3c_details).data
+            
+            return send_response(result=True, data=form3c_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -498,7 +588,25 @@ class form3CView(APIView):
 
 class form4AView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form4a details for the user
+            form4a_details = Form4A.objects.filter(user=user).first()
+            
+            if not form4a_details:
+                return send_response(result=False, message="Form4A details not found for this user")
+            
+            # Serialize the form4a details
+            form4a_data = Form4ASerializer(form4a_details).data
+            
+            return send_response(result=True, data=form4a_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -544,7 +652,25 @@ class form4AView(APIView):
 
 class form4BView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form4b details for the user
+            form4b_details = Form4B.objects.filter(user=user).first()
+            
+            if not form4b_details:
+                return send_response(result=False, message="Form4B details not found for this user")
+            
+            # Serialize the form4b details
+            form4b_data = Form4BSerializer(form4b_details).data
+            
+            return send_response(result=True, data=form4b_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -588,7 +714,25 @@ class form4BView(APIView):
 
 class form4CView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form4c details for the user
+            form4c_details = Form4C.objects.filter(user=user).first()
+            
+            if not form4c_details:
+                return send_response(result=False, message="Form4C details not found for this user")
+            
+            # Serialize the form4c details
+            form4c_data = Form4CSerializer(form4c_details).data
+            
+            return send_response(result=True, data=form4c_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             # Extract form data from request
@@ -648,7 +792,25 @@ class form4CView(APIView):
 
 class form4DView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form4d details for the user
+            form4d_details = Form4D.objects.filter(user=user).first()
+            
+            if not form4d_details:
+                return send_response(result=False, message="Form4D details not found for this user")
+            
+            # Serialize the form4d details
+            form4d_data = Form4DSerializer(form4d_details).data
+            
+            return send_response(result=True, data=form4d_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             user=request.user
@@ -671,7 +833,25 @@ class form4DView(APIView):
 
 class form4EView(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form4e details for the user
+            form4e_details = Form4E.objects.filter(user=user).first()
+            
+            if not form4e_details:
+                return send_response(result=False, message="Form4E details not found for this user")
+            
+            # Serialize the form4e details
+            form4e_data = Form4ESerializer(form4e_details).data
+            
+            return send_response(result=True, data=form4e_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             user=request.user
@@ -701,7 +881,25 @@ class form4EView(APIView):
 
 class form5View(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form5 details for the user
+            form5_details = Form5.objects.filter(user=user).first()
+            
+            if not form5_details:
+                return send_response(result=False, message="Form5 details not found for this user")
+            
+            # Serialize the form5 details
+            form5_data = Form5Serializer(form5_details).data
+            
+            return send_response(result=True, data=form5_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             user=request.user
@@ -740,7 +938,25 @@ class form5View(APIView):
 
 class form6View(APIView):
     permission_classes = [IsAuthenticated]
-
+    def get(self, request, pk):
+        try:
+            # Check if the user exists
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            
+            # Fetch Form6 details for the user
+            form6_details = Form6.objects.filter(user=user).first()
+            
+            if not form6_details:
+                return send_response(result=False, message="Form6 details not found for this user")
+            
+            # Serialize the form6 details
+            form6_data = Form6Serializer(form6_details).data
+            
+            return send_response(result=True, data=form6_data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
     def post(self, request):
         try:
             user=request.user
