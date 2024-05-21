@@ -114,7 +114,7 @@ class Form5Serializer(serializers.ModelSerializer):
         model = Form5
         fields = '__all__'
 
-class CommentSerializer(serializers.Serializer):
+class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = '__all__'   
