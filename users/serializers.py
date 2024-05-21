@@ -121,7 +121,6 @@ class CommentSerializer(serializers.Serializer):
 
 class Form6Serializer(serializers.ModelSerializer):
     comment = serializers.CharField(required=False)
-    committee = CommitteeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form6

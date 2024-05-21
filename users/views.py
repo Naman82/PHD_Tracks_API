@@ -114,60 +114,59 @@ class userView(APIView):
             if not User.objects.filter(pk=pk).exists():
                 return send_response(result=False, message="User does not exist")
             user = User.objects.get(pk=pk)
+            user_data = UserSerializer(user).data
             if Form1A.objects.filter(user=user).exists():
                 form1a = Form1A.objects.filter(user=user).first()
                 form1a_data = Form1ASerializer(form1a).data
+                user_data['form1a'] = form1a_data
             if Form1B.objects.filter(user=user).exists():
                 form1b = Form1B.objects.filter(user=user).first()
                 form1b_data = Form1BSerializer(form1b).data
+                user_data['form1b'] = form1b_data
             if Form2.objects.filter(user=user).exists():
                 form2 = Form2.objects.filter(user=user).first()
                 form2_data = Form2Serializer(form2).data
+                user_data['form2'] = form2_data
             if Form3A.objects.filter(user=user).exists():
                 form3a = Form3A.objects.filter(user=user).first()
                 form3a_data = Form3ASerializer(form3a).data
+                user_data['form3a'] = form3a_data
             if Form3B.objects.filter(user=user).exists():
                 form3b = Form3B.objects.filter(user=user).first()
                 form3b_data = Form3BSerializer(form3b).data
+                user_data['form3b'] = form3b_data
             if Form3C.objects.filter(user=user).exists():
                 form3c = Form3C.objects.filter(user=user).first()
                 form3c_data = Form3CSerializer(form3c).data
+                user_data['form3c'] = form3c_data
             if Form4A.objects.filter(user=user).exists():
                 form4a = Form4A.objects.filter(user=user).first()
                 form4a_data = Form4ASerializer(form4a).data
+                user_data['form4a'] = form4a_data
             if Form4B.objects.filter(user=user).exists():
                 form4b = Form4B.objects.filter(user=user).first()
                 form4b_data = Form4BSerializer(form4b).data
+                user_data['form4b'] = form4b_data
             if Form4C.objects.filter(user=user).exists():
                 form4c = Form4C.objects.filter(user=user).first()
                 form4c_data = Form4CSerializer(form4c).data
+                user_data['form4c'] = form4c_data
             if Form4D.objects.filter(user=user).exists():
                 form4d = Form4D.objects.filter(user=user).first()
                 form4d_data = Form4DSerializer(form4d).data
+                user_data['form4d'] = form4d_data
             if Form4E.objects.filter(user=user).exists():
                 form4e = Form4E.objects.filter(user=user).first()
                 form4e_data = Form4ESerializer(form4e).data
+                user_data['form4e'] = form4e_data
             if Form5.objects.filter(user=user).exists():
                 form5 = Form5.objects.filter(user=user).first()
                 form5_data = Form5Serializer(form5).data
+                user_data['form5'] = form5_data
             if Form6.objects.filter(user=user).exists():
                 form6 = Form6.objects.filter(user=user).first()
                 form6_data = Form6Serializer(form6).data
-
-            user_data = UserSerializer(user).data
-            user_data['form1a'] = form1a_data
-            user_data['form1b'] = form1b_data
-            user_data['form2'] = form2_data
-            user_data['form3a'] = form3a_data
-            user_data['form3b'] = form3b_data
-            user_data['form3c'] = form3c_data
-            user_data['form4a'] = form4a_data
-            user_data['form4b'] = form4b_data
-            user_data['form4c'] = form4c_data
-            user_data['form4d'] = form4d_data
-            user_data['form4e'] = form4e_data
-            user_data['form5'] = form5_data
-            user_data['form6'] = form6_data
+                user_data['form6'] = form6_data
 
             return send_response(result=True, data=user_data)
 
@@ -1036,6 +1035,7 @@ class form6View(APIView):
             
             if not name or not date_of_viva_voce or not rollno or not department or not title_of_thesis or not degree or not indian_examiner or not foreign_examiner or not supervisor or not number_of_people or not performance or not comments :
                 return send_response(result=False, message="Empty Fields")
+            
             form6 = Form6.objects.create(
                 user=user,
                 name=name,
