@@ -37,7 +37,7 @@ class User(AbstractUser):
     form4e_submitted = models.DateTimeField(null=True,blank=True)
     form5_submitted = models.DateTimeField(null=True,blank=True)
     form6_submitted = models.DateTimeField(null=True,blank=True)
-
+    roll_no = models.CharField(max_length=255,null=True,blank=True)
     date_joined = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
