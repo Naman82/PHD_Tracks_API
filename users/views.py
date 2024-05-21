@@ -96,7 +96,7 @@ class loginView(APIView):
             return send_response(result=False, message=str(e))
         
 
-class userView(APIView):
+class userListView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
@@ -109,6 +109,9 @@ class userView(APIView):
         except Exception as e:
             return send_response(result=False, message=str(e))
         
+class userDetailsView(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request, pk):
         try:
             if not User.objects.filter(pk=pk).exists():

@@ -12,9 +12,9 @@ urlpatterns = [
 
     path('examiner/list/',examinerView.as_view(),name='examinerView'),
     path('examiner/<int:pk>/update/',examinerView.as_view(),name='examinerView-update'),
-    path('user/list/',userView.as_view(),name='userView-list'),
-    path('user/<int:pk>/',userView.as_view(),name='userView-detail'),
-    path('user/<int:pk>/update/',userView.as_view(),name='userView-update'),
+    path('user/list/',userListView.as_view(),name='userView-list'),
+    path('user/<int:pk>/',userDetailsView.as_view(),name='userView-detail'),
+    path('user/<int:pk>/update/',userDetailsView.as_view(),name='userView-update'),
 
     path('form1A/user/<int:pk>/',form1AView.as_view(),name="Form1AView-Get"),
     path('form1A/user/',form1AView.as_view(),name="Form1AView"),
