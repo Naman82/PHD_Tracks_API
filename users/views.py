@@ -102,7 +102,8 @@ class userListView(APIView):
     def get(self, request):
         try:
             if request.user.is_superuser:
-                users = User.objects.all()
+
+                users = User.objects.filter(is_superuser=False)
                 return send_response(result=True, data=UserSerializer(users, many=True).data)
             else:
                 return send_response(result=False, message="You are not authorized to view this page")
