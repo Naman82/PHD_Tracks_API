@@ -120,7 +120,7 @@ class CommentSerializer(serializers.ModelSerializer):
         fields = '__all__'   
 
 class Form6Serializer(serializers.ModelSerializer):
-    comment = serializers.CharField(required=False)
+    comment = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Form6
