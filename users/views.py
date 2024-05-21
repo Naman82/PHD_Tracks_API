@@ -1032,9 +1032,9 @@ class form6View(APIView):
             number_of_people = request.data.get('number_of_people', None)
             performance = request.data.get('performance', None)
             comments = request.data.get('comments', [])
-            committees = request.data.get('committees', None)
+            # committees = request.data.get('committees', None)
             
-            if not name or not date_of_viva_voce or not rollno or not department or not title_of_thesis or not degree or not indian_examiner or not foreign_examiner or not supervisor or not number_of_people or not performance or not comments or not committees:
+            if not name or not date_of_viva_voce or not rollno or not department or not title_of_thesis or not degree or not indian_examiner or not foreign_examiner or not supervisor or not number_of_people or not performance or not comments :
                 return send_response(result=False, message="Empty Fields")
             form6 = Form6.objects.create(
                 user=user,
@@ -1051,13 +1051,13 @@ class form6View(APIView):
                 performance=performance,
             )
 
-            for committee in committees:
-                serializer = CommitteeSerializer(data=committee)
-                if serializer.is_valid():
-                    committee_instance = serializer.save()
-                    form6.committee.add(committee_instance)
-                else:
-                    return send_response(result=False, message=serializer.errors)
+            # for committee in committees:
+            #     serializer = CommitteeSerializer(data=committee)
+            #     if serializer.is_valid():
+            #         committee_instance = serializer.save()
+            #         form6.committee.add(committee_instance)
+            #     else:
+            #         return send_response(result=False, message=serializer.errors)
                 
             for comment in comments:
                 serializer = CommentSerializer(data=comment)

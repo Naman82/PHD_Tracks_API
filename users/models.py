@@ -250,5 +250,5 @@ class Form6(models.Model):
     number_of_people = models.IntegerField()
     performance = models.TextField()
     comment = models.ManyToManyField(Comment)
-    committee = committee = models.ManyToManyField(Committee)
+    # committee = committee = models.ManyToManyField(Committee)
 
