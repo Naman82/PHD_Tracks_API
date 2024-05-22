@@ -200,7 +200,10 @@ class userDetailsView(APIView):
                 user.thesis_url = request.data.get('thesis_url')
             if 'status' in request.data:
                 user.status = request.data.get('status')    
-
+            if 'comments_by_indian' in request.data:
+                user.comments_by_indian = request.data.get('comments_by_indian')
+            if 'comments_by_foreign' in request.data:
+                user.comments_by_foreign = request.data.get('comments_by_foreign')
             user.save()
             return send_response(result=True, message="User updated successfully")
         except Exception as e:
