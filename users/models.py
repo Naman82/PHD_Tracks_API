@@ -74,6 +74,7 @@ class Form1A(models.Model):
     category_of_studentship = models.CharField(max_length=255)
     recommender_1 = models.CharField(max_length=255)
     recommender_2 = models.CharField(max_length=255)
+    softcopy_url = models.URLField(null=True,blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.department} - {self.rollno}"
@@ -94,6 +95,7 @@ class Form1B(models.Model):
     area_of_research = models.TextField()
     category_of_studentship = models.CharField(max_length=255)
     course = models.ManyToManyField(Course)
+    softcopy_url = models.URLField(null=True,blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.department} - {self.rollno}"
@@ -109,6 +111,7 @@ class Form2(models.Model):
     work_done = models.IntegerField()
     nature_of_work = models.TextField()
     remarks_by_supervisor = models.TextField()
+    softcopy_url = models.URLField(null=True,blank=True)
 
     def __str__(self):
         return f"{self.name} - {self.department} - {self.rollno}"
@@ -119,6 +122,7 @@ class Form3A(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=255)
     seminar_date = models.DateField()
+    softcopy_url = models.URLField(null=True,blank=True)
 
     def __str__(self):
         return self.name
@@ -139,6 +143,7 @@ class Form3B(models.Model):
     area_of_research = models.TextField()
     institute_stay_date_from = models.DateField()
     institute_stay_date_to = models.DateField()
+    softcopy_url = models.URLField(null=True,blank=True)
 
 
 class Committee(models.Model):
@@ -156,6 +161,7 @@ class Form3C(models.Model):
     topic_of_talk = models.TextField()
     progress = models.CharField(max_length=255)
     committee = models.ManyToManyField(Committee)
+    softcopy_url = models.URLField(null=True,blank=True)
 
 
 class Form4A(models.Model):
@@ -165,6 +171,7 @@ class Form4A(models.Model):
     rollno = models.CharField(max_length=255)
     department = models.CharField(max_length=255)
     committee = models.ManyToManyField(Committee)
+    softcopy_url = models.URLField(null=True,blank=True)
 
 
 class Form4B(models.Model):
@@ -175,6 +182,7 @@ class Form4B(models.Model):
     department = models.CharField(max_length=255)
     thesis_date = models.DateField()
     committee = models.ManyToManyField(Committee)
+    softcopy_url = models.URLField(null=True,blank=True)
 
 class Examiner(models.Model):
     name = models.CharField(max_length=255)
@@ -187,6 +195,7 @@ class Examiner(models.Model):
     phone = models.CharField(max_length=13)
     is_indian = models.BooleanField(default=True)
     email = models.EmailField()
+    softcopy_url = models.URLField(null=True,blank=True)
 
 class Form4C(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -201,11 +210,13 @@ class Form4C(models.Model):
     indian_examiner = models.ForeignKey(Examiner,on_delete=models.CASCADE, related_name="indianExaminer")
     foreign_examiner = models.ForeignKey(Examiner,on_delete=models.CASCADE, related_name="foreignExaminer")
     committee = models.ManyToManyField(Committee)
+    softcopy_url = models.URLField(null=True,blank=True)
 
 class Form4D(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
     is_accepted = models.BooleanField(default=False)
+    softcopy_url = models.URLField(null=True,blank=True)
 
 
 class Form4E(models.Model):
@@ -215,6 +226,7 @@ class Form4E(models.Model):
     title_of_manuscript = models.TextField()
     conference_name = models.TextField()
     year_of_publications = models.TextField()
+    softcopy_url = models.URLField(null=True,blank=True)
 
 
 class Form5(models.Model):
@@ -227,6 +239,7 @@ class Form5(models.Model):
     is_modification = models.BooleanField(default=False)
     is_modification_final = models.BooleanField(default=False)
     is_rejected = models.BooleanField(default=False)
+    softcopy_url = models.URLField(null=True,blank=True)
 
 
 
@@ -250,5 +263,6 @@ class Form6(models.Model):
     number_of_people = models.IntegerField()
     performance = models.TextField()
     comment = models.ManyToManyField(Comment)
+    softcopy_url = models.URLField(null=True,blank=True)
     # committee = committee = models.ManyToManyField(Committee)
 

@@ -303,6 +303,21 @@ class form1AView(APIView):
         except Exception as e:
             # return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)    
             return send_response(result=False, message=str(e))
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form1A.objects.filter(user=user).exists():
+                form1A=Form1A.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form1A.softcopy_url = request.data.get('softcopy_url')
+                    form1A.save()
+            return send_response(result=True, message="Form1A updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))    
         
 class form1BView(APIView):
     permission_classes = [IsAuthenticated]
@@ -371,7 +386,21 @@ class form1BView(APIView):
         except Exception as e:
             # return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)    
             return send_response(result=False, message=str(e))
-
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form1B.objects.filter(user=user).exists():
+                form1B=Form1B.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form1B.softcopy_url = request.data.get('softcopy_url')
+                    form1B.save()
+            return send_response(result=True, message="Form1B updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))   
 
 class form2View(APIView):
     permission_classes = [IsAuthenticated]
@@ -443,7 +472,23 @@ class form2View(APIView):
         except Exception as e:
             # return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)    
             return send_response(result=False, message=str(e))
-        
+
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form2.objects.filter(user=user).exists():
+                form2=Form2.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form2.softcopy_url = request.data.get('softcopy_url')
+                    form2.save()
+            return send_response(result=True, message="Form2 updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))   
+           
 class form3AView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, pk):
@@ -503,7 +548,22 @@ class form3AView(APIView):
             # return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)    
             return send_response(result=False, message=str(e))
         
-
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form3A.objects.filter(user=user).exists():
+                form3A=Form3A.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form3A.softcopy_url = request.data.get('softcopy_url')
+                    form3A.save()
+            return send_response(result=True, message="Form3A updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))   
+        
 class form3BView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, pk):
@@ -586,7 +646,21 @@ class form3BView(APIView):
         except Exception as e:
             # return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)    
             return send_response(result=False, message=str(e))
-        
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form3B.objects.filter(user=user).exists():
+                form3B=Form3B.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form3B.softcopy_url = request.data.get('softcopy_url')
+                    form3B.save()
+            return send_response(result=True, message="Form3B updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))   
 
 class form3CView(APIView):
     permission_classes = [IsAuthenticated]
@@ -652,7 +726,22 @@ class form3CView(APIView):
             return send_response(result=True, message="Form3C created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
-
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form3C.objects.filter(user=user).exists():
+                form3C=Form3C.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form3C.softcopy_url = request.data.get('softcopy_url')
+                    form3C.save()
+            return send_response(result=True, message="Form3C updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
+        
 class form4AView(APIView):
     permission_classes = [IsAuthenticated]
     def get(self, request, pk):
@@ -715,7 +804,21 @@ class form4AView(APIView):
             return send_response(result=True, message="Form4A created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
-        
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form4A.objects.filter(user=user).exists():
+                form4A=Form4A.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form4A.softcopy_url = request.data.get('softcopy_url')
+                    form4A.save()
+            return send_response(result=True, message="Form4A updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
 
 class form4BView(APIView):
     permission_classes = [IsAuthenticated]
@@ -777,7 +880,21 @@ class form4BView(APIView):
             return send_response(result=True, message="Form4B created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
-        
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form4B.objects.filter(user=user).exists():
+                form4B=Form4B.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form4B.softcopy_url = request.data.get('softcopy_url')
+                    form4B.save()
+            return send_response(result=True, message="Form4B updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
 
 class form4CView(APIView):
     permission_classes = [IsAuthenticated]
@@ -854,7 +971,21 @@ class form4CView(APIView):
             return send_response(result=True, message="Form4C created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
-        
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form4C.objects.filter(user=user).exists():
+                form4C=Form4C.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form4C.softcopy_url = request.data.get('softcopy_url')
+                    form4C.save()
+            return send_response(result=True, message="Form4C updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
 
 
 class form4DView(APIView):
@@ -897,6 +1028,21 @@ class form4DView(APIView):
             return send_response(result=True, message="Form4D created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form4D.objects.filter(user=user).exists():
+                form4D=Form4B.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form4D.softcopy_url = request.data.get('softcopy_url')
+                    form4D.save()
+            return send_response(result=True, message="Form4D updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
 
 class form4EView(APIView):
     permission_classes = [IsAuthenticated]
@@ -944,7 +1090,21 @@ class form4EView(APIView):
             return send_response(result=True, message="Form4E created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
-
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form4E.objects.filter(user=user).exists():
+                form4E=Form4E.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form4E.softcopy_url = request.data.get('softcopy_url')
+                    form4E.save()
+            return send_response(result=True, message="Form4E updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
 
 class form5View(APIView):
     permission_classes = [IsAuthenticated]
@@ -1000,7 +1160,21 @@ class form5View(APIView):
             return send_response(result=True, message="Form5 created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
-        
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form5.objects.filter(user=user).exists():
+                form5=Form5.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form5.softcopy_url = request.data.get('softcopy_url')
+                    form5.save()
+            return send_response(result=True, message="Form5 updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
 
 
 class form6View(APIView):
@@ -1082,5 +1256,20 @@ class form6View(APIView):
             return send_response(result=True, message="Form6 created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
+    def patch(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="User does not exist")
+            user = User.objects.get(pk=pk)
+            # if 'profile_pic' in request.data:
+            #     user.profile_pic = request.data.get('profile_pic')
+            if Form6.objects.filter(user=user).exists():
+                form6=Form6.objects.get(user=user)
+                if 'softcopy_url' in request.data:
+                    form6.softcopy_url = request.data.get('softcopy_url')
+                    form6.save()
+            return send_response(result=True, message="Form6 updated successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e)) 
         
         
