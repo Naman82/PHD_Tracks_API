@@ -42,8 +42,8 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
+    comments_by_indian = models.TextField(null=True,blank=True)
+    comments_by_foreign = models.TextField(null=True,blank=True)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = UserManager()
