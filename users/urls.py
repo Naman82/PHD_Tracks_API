@@ -42,4 +42,6 @@ urlpatterns = [
     path('form5/user/',form5View.as_view(),name="Form5View"),
     path('form6/user/<int:pk>/',form6View.as_view(),name="Form6View-Get"),
     path('form6/user/',form6View.as_view(),name="Form6View"),
+
+    path('user/thesis/list/',ThesisDownloadView.as_view(),name="ThesisDownloadView"),
 ]

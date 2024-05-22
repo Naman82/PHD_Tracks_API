@@ -16,6 +16,25 @@ class indexView(APIView):
             return send_response(result=True, message="Welcome to the PHD Tracks API")
         except Exception as e:
             return send_response(result=False, message=str(e))
+        
+class ThesisDownloadView(APIView):
+    def get(self,request):
+        try:
+            users = User.objects.filter(is_active=False, is_superuser=False)
+            data = []
+            for user in users:
+                if user.thesis_url:
+                    data.append({
+                        'id': user.id,
+                        'name': user.first_name + ' ' + user.last_name,
+                        'roll_no': user.roll_no,
+                        'supervisor': user.supervisor,
+                        'thesis_url': user.thesis_url
+                    })
+            return send_response(result=True, data=data)
+
+        except Exception as e:
+            return send_response(result=False, message=str(e))
 
 
 class userRegistrationView(APIView):

@@ -50,6 +50,13 @@ class User(AbstractUser):
 
     def __str__(self):
         return "{},{},{}".format(self.email, self.first_name, self.last_name)
+    
+    def save(self, *args, **kwargs):
+        if self.status == "Defence Closed":
+            self.is_active = False
+        else:
+            self.is_active = True
+        super(User, self).save(*args, **kwargs)
 
 class Education(models.Model):
     standard = models.CharField(max_length=255)
