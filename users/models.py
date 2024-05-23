@@ -202,7 +202,6 @@ class Examiner(models.Model):
     phone = models.CharField(max_length=13)
     is_indian = models.BooleanField(default=True)
     email = models.EmailField()
-    softcopy_url = models.URLField(null=True,blank=True)
 
 class Form4C(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
