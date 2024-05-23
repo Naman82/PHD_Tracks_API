@@ -29,7 +29,8 @@ class ThesisDownloadView(APIView):
                         'name': user.first_name + ' ' + user.last_name,
                         'roll_no': user.roll_no,
                         'supervisor': user.supervisor,
-                        'thesis_url': user.thesis_url
+                        'thesis_url': user.thesis_url,
+                        'area_of_research':user.area_of_research,
                     })
             return send_response(result=True, data=data)
 
