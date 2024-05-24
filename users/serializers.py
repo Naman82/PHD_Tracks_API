@@ -1,8 +1,13 @@
 from rest_framework import serializers
 from .models import *
 
-
+class SupervisorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name'] 
+        
 class UserSerializer(serializers.ModelSerializer):
+    supervisor=SupervisorSerializer()
     class Meta:
         model = User
         exclude = ['password']

@@ -72,7 +72,7 @@ class userRegistrationView(APIView):
                         new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department, roll_no=roll_no, supervisor=user,status='Newbie', user_type=user_type)
                         return send_response(result=True, message="User created successfully")
                     else:
-                        new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department, roll_no=roll_no, status='Newbie', user_type=user_type)
+                        new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department, roll_no=roll_no, user_type=user_type)
                         return send_response(result=True, message="User created successfully")
                 else:
                     return send_response(result=False, message="User with this email already exists")
