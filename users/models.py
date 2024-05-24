@@ -59,7 +59,7 @@ class User(AbstractUser):
     comments_by_indian = models.TextField(null=True,blank=True)
     comments_by_foreign = models.TextField(null=True,blank=True)
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['user_type']
     objects = UserManager()
 
     def __str__(self):
