@@ -70,6 +70,13 @@ class User(AbstractUser):
             self.is_active = False
         else:
             self.is_active = True
+        if self.user_type == "admin" or self.user_type == "co-admin":
+            self.is_staff = True
+            self.is_superuser = True
+        else:
+            self.is_staff = False
+            self.is_superuser = False
+                
         super(User, self).save(*args, **kwargs)
 
 # class Education(models.Model):
