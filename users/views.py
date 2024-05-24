@@ -63,6 +63,7 @@ class userRegistrationView(APIView):
             password = request.data.get('password', None)
             roll_no = request.data.get('roll_no', None)
             supervisor = request.data.get('supervisor', None)
+            supervisor=int(supervisor)
             if first_name is not None and last_name is not None and email is not None and password is not None and department is not None   and user_type is not None:
                 user = User.objects.filter(email=email)
                 if not user.exists():
