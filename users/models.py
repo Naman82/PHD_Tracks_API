@@ -34,7 +34,7 @@ class User(AbstractUser):
     designation = models.CharField(max_length=255,null=True,blank=True)
     # supervisor = models.CharField(max_length=255,null=True,blank=True)
     supervisor = models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True)
-    dsc_committee = models.ManyToManyField('self')
+    dsc_committee = models.ManyToManyField('self',null=True,blank=True)
     status = models.CharField(max_length=255,null=True,blank=True)
     thesis_url = models.URLField(null=True,blank=True)
 
