@@ -846,3 +846,24 @@ class form6View(APIView):
         except Exception as e:
             return send_response(result=False, message=str(e))
         
+
+class professorList(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self,request):
+        try:
+            professors = User.objects.filter(user_type='professor')
+            return send_response(result=True, data=UserSerializer(professors, many=True).data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
+        
+class studentsOfProfessor(APIView):
+    permission_classes = [IsAuthenticated]
+    def get(self,request,pk):
+        try:
+            if not User.objects.filter(pk=pk).exists():
+                return send_response(result=False, message="Professor does not exist")
+            professor = User.objects.get(pk=pk)
+            students = User.objects.filter(supervisor=professor)
+            return send_response(result=True, data=UserSerializer(students, many=True).data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
