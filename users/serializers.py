@@ -1,8 +1,5 @@
 from rest_framework import serializers
-from .models import (
-    User, Education, Form1A, Course, Form1B, Form2, Form3A, Form3B, Committee, Comment,
-    Form3C, Form4A, Form4B, Examiner, Form4C, Form4D, Form4E, Form5, Form6
-)
+from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -15,26 +12,26 @@ class TokenSerializer(serializers.Serializer):
     access = serializers.CharField()
     user = UserSerializer()  # Include the user serializer here
     
-class EducationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Education
-        fields = '__all__'
+# class EducationSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Education
+#         fields = '__all__'
 
 class Form1ASerializer(serializers.ModelSerializer):
-    education = EducationSerializer(many=True, read_only=True)
+    # education = EducationSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form1A
         fields = '__all__'
-        depth = 1
 
-class CourseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Course
-        fields = '__all__'
+
+# class CourseSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Course
+#         fields = '__all__'
 
 class Form1BSerializer(serializers.ModelSerializer):
-    course = CourseSerializer(many=True, read_only=True)
+    # course = CourseSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form1B
@@ -55,49 +52,48 @@ class Form3BSerializer(serializers.ModelSerializer):
         model = Form3B
         fields = '__all__'
 
-class CommitteeSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Committee
-        fields = '__all__'
+# class CommitteeSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Committee
+#         fields = '__all__'
 
 class Form3CSerializer(serializers.ModelSerializer):
-    committee = CommitteeSerializer(many=True, read_only=True)
+    # committee = CommitteeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form3C
         fields = '__all__'
-        depth = 1
+  
 
 class Form4ASerializer(serializers.ModelSerializer):
-    committee = CommitteeSerializer(many=True, read_only=True)
+    # committee = CommitteeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form4A
         fields = '__all__'
-        depth = 1
+
 
 class Form4BSerializer(serializers.ModelSerializer):
-    committee = CommitteeSerializer(many=True, read_only=True)
+    # committee = CommitteeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form4B
         fields = '__all__'
-        depth = 1
 
-class ExaminerSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Examiner
-        fields = '__all__'
+
+# class ExaminerSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Examiner
+#         fields = '__all__'
 
 class Form4CSerializer(serializers.ModelSerializer):
-    indian_examiner = ExaminerSerializer(read_only=True)
-    foreign_examiner = ExaminerSerializer(read_only=True)
-    committee = CommitteeSerializer(many=True, read_only=True)
+    # indian_examiner = ExaminerSerializer(read_only=True)
+    # foreign_examiner = ExaminerSerializer(read_only=True)
+    # committee = CommitteeSerializer(many=True, read_only=True)
 
     class Meta:
         model = Form4C
         fields = '__all__'
-        depth = 1
 
 class Form4DSerializer(serializers.ModelSerializer):
     class Meta:
@@ -113,16 +109,17 @@ class Form5Serializer(serializers.ModelSerializer):
     class Meta:
         model = Form5
         fields = '__all__'
+        
 
-class CommentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Comment
-        fields = '__all__'   
+# class CommentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Comment
+#         fields = '__all__'   
 
 class Form6Serializer(serializers.ModelSerializer):
-    comment = CommentSerializer(read_only=True, many=True)
+    # comment = CommentSerializer(read_only=True, many=True)
 
     class Meta:
         model = Form6
         fields = '__all__'
-        depth = 1
+ 

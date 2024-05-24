@@ -6,12 +6,12 @@ from .views import *
 urlpatterns = [
     path('',indexView.as_view(),name="indexView"),
     path('register/user/',userRegistrationView.as_view(),name="userRegistrationView"),
-    path('register/admin/',adminRegisterationView.as_view(),name="adminRegisterationView"),
+    # path('register/admin/',adminRegisterationView.as_view(),name="adminRegisterationView"),
     path('login/',loginView.as_view(),name="loginView"),
     path('token-refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
-    path('examiner/list/',examinerView.as_view(),name='examinerView'),
-    path('examiner/<int:pk>/update/',examinerView.as_view(),name='examinerView-update'),
+    # path('examiner/list/',examinerView.as_view(),name='examinerView'),
+    # path('examiner/<int:pk>/update/',examinerView.as_view(),name='examinerView-update'),
     path('user/list/',userListView.as_view(),name='userView-list'),
     path('user/<int:pk>/',userDetailsView.as_view(),name='userView-detail'),
     path('user/<int:pk>/update/',userDetailsView.as_view(),name='userView-update'),
