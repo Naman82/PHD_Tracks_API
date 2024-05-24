@@ -860,7 +860,6 @@ class form6View(APIView):
         
 
 class professorList(APIView):
-    permission_classes = [IsAuthenticated]
     def get(self,request):
         try:
             professors = User.objects.filter(user_type='professor')
