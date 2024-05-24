@@ -20,10 +20,11 @@ class indexView(APIView):
 class ThesisDownloadView(APIView):
     def get(self,request):
         try:
-            users = User.objects.filter(is_active=False, is_superuser=False)
+            users = User.objects.all()
             data = []
+            # print(users)
             for user in users:
-                if user.thesis_url:
+                if not user.is_superuser and not user.is_active:
                     data.append({
                         'id': user.id,
                         'name': user.first_name + ' ' + user.last_name,
@@ -33,6 +34,15 @@ class ThesisDownloadView(APIView):
                         # 'area_of_research':user.area_of_research,
                         'title_of_thesis': user.title_of_thesis
                     })
+                # data.append({
+                #     'id': user.id,
+                #     'name': user.first_name + ' ' + user.last_name,
+                #     'roll_no': user.roll_no,
+                #     'supervisor': user.supervisor.first_name + ' ' + user.supervisor.last_name,
+                #     'thesis_url': user.thesis_url,
+                #     # 'area_of_research':user.area_of_research,
+                #     'title_of_thesis': user.title_of_thesis
+                # })
             return send_response(result=True, data=data)
 
         except Exception as e:

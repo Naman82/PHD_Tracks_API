@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 from django.core.validators import MaxValueValidator
 import os, uuid
-
+from django.contrib.auth.hashers import make_password
 from .managers import UserManager
 from django.utils.translation import gettext_lazy as _
 
@@ -70,12 +70,16 @@ class User(AbstractUser):
             self.is_active = False
         else:
             self.is_active = True
-        if self.user_type == "admin" or self.user_type == "co-admin":
+        if self.user_type == "admin" or self.user_type == "co-admin" or self.user_type == "professor":
             self.is_staff = True
             self.is_superuser = True
         else:
             self.is_staff = False
             self.is_superuser = False
+
+        # Hash the password if it is not hashed already
+        if self.pk is None and not self.password.startswith('pbkdf2_'):
+            self.password = make_password(self.password)
                 
         super(User, self).save(*args, **kwargs)
 
