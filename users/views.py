@@ -248,7 +248,19 @@ class userDetailsView(APIView):
             if 'foreign_examiner_id' in request.data:
                 foreign_examiner=Examiner.objects.get(pk=request.data.get('foreign_examiner_id'))
                 user.foreign_examiner = foreign_examiner
-            
+
+            if 'dsc_committee' in request.data:
+                dsc_committee = request.data.get('dsc_committee')
+                for member in dsc_committee:
+                    member = User.objects.get(pk=member)
+                    user.dsc_committee.add(member)
+
+            if 'dsc_committee_remove' in request.data:
+                dsc_committee_remove = request.data.get('dsc_committee_remove')
+                for member in dsc_committee_remove:
+                    member = User.objects.get(pk=member)
+                    user.dsc_committee.remove(member)
+
             user.save()
             return send_response(result=True, message="User updated successfully")
         except Exception as e:
@@ -283,7 +295,7 @@ class examinerView(APIView):
             serializer = ExaminerSerializer(data=request.data)
             if serializer.is_valid():
                 serializer.save()
-                return send_response(result=true, message="Examiner created successfully")
+                return send_response(result=True, message="Examiner created successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
         
