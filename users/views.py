@@ -63,7 +63,6 @@ class userRegistrationView(APIView):
             password = request.data.get('password', None)
             roll_no = request.data.get('roll_no', None)
             supervisor = request.data.get('supervisor', None)
-            supervisor=int(supervisor)
             if first_name is not None and last_name is not None and email is not None and password is not None and department is not None   and user_type is not None:
                 user = User.objects.filter(email=email)
                 if not user.exists():
@@ -72,7 +71,7 @@ class userRegistrationView(APIView):
                         new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department, roll_no=roll_no, supervisor=user,status='Newbie', user_type=user_type)
                         return send_response(result=True, message="User created successfully")
                     else:
-                        new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department, roll_no=roll_no, user_type=user_type)
+                        new_user = User.objects.create_user(email=email, first_name=first_name,last_name=last_name, password=password, department=department, user_type=user_type)
                         return send_response(result=True, message="User created successfully")
                 else:
                     return send_response(result=False, message="User with this email already exists")
