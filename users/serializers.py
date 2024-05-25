@@ -11,11 +11,17 @@ class ExaminerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Examiner
         fields = '__all__'
+
+class DscCommitteeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'first_name', 'last_name', 'email']
         
 class UserSerializer(serializers.ModelSerializer):
     supervisor=SupervisorSerializer()
     indian_examiner=ExaminerSerializer()
     foreign_examiner=ExaminerSerializer()
+    dsc_committee = DscCommitteeSerializer(many=True)
     class Meta:
         model = User
         exclude = ['password']
