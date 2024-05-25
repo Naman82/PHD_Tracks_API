@@ -5,9 +5,17 @@ class SupervisorSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'first_name', 'last_name'] 
+
+
+class ExaminerSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Examiner
+        fields = '__all__'
         
 class UserSerializer(serializers.ModelSerializer):
     supervisor=SupervisorSerializer()
+    indian_examiner=ExaminerSerializer()
+    foreign_examiner=ExaminerSerializer()
     class Meta:
         model = User
         exclude = ['password']
@@ -85,11 +93,6 @@ class Form4BSerializer(serializers.ModelSerializer):
         model = Form4B
         fields = '__all__'
 
-
-# class ExaminerSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = Examiner
-#         fields = '__all__'
 
 class Form4CSerializer(serializers.ModelSerializer):
     # indian_examiner = ExaminerSerializer(read_only=True)

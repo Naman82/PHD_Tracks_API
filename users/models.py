@@ -8,6 +8,22 @@ from django.contrib.auth.hashers import make_password
 from .managers import UserManager
 from django.utils.translation import gettext_lazy as _
 
+
+class Examiner(models.Model):
+    name = models.CharField(max_length=255)
+    designation = models.CharField(max_length=255,null=True,blank=True)
+    institute = models.TextField()
+    # priority = models.IntegerField(validators=[MaxValueValidator(100)])
+    # is_assigned = models.BooleanField(default=False)
+    # areas_of_interest = models.TextField()
+    # address = models.TextField()
+    # phone = models.CharField(max_length=13)
+    is_indian = models.BooleanField(default=True)
+    email = models.EmailField()
+
+    def __str__(self):
+        return str(self.name)
+
 class User(AbstractUser):
 
     def get_update_filename(self, filename):
@@ -58,6 +74,8 @@ class User(AbstractUser):
     updated_at = models.DateTimeField(auto_now=True)
     comments_by_indian = models.TextField(null=True,blank=True)
     comments_by_foreign = models.TextField(null=True,blank=True)
+    indian_examiner = models.ForeignKey(Examiner,on_delete=models.CASCADE,null=True,blank=True,related_name="indian")
+    foreign_examiner = models.ForeignKey(Examiner,on_delete=models.CASCADE,null=True,blank=True,related_name="foreign")
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['user_type']
     objects = UserManager()
@@ -224,21 +242,6 @@ class Form4B(models.Model):
     # thesis_date = models.DateField()
     # committee = models.ManyToManyField(Committee)
     softcopy_url = models.URLField(null=True,blank=True)
-
-    def __str__(self):
-        return str(self.user.email)
-
-class Examiner(models.Model):
-    name = models.CharField(max_length=255)
-    # designation = models.CharField(max_length=255)
-    # institute = models.TextField()
-    # priority = models.IntegerField(validators=[MaxValueValidator(100)])
-    # is_assigned = models.BooleanField(default=False)
-    # areas_of_interest = models.TextField()
-    # address = models.TextField()
-    # phone = models.CharField(max_length=13)
-    # is_indian = models.BooleanField(default=True)
-    email = models.EmailField()
 
     def __str__(self):
         return str(self.user.email)

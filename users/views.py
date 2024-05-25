@@ -234,41 +234,58 @@ class userDetailsView(APIView):
                 user.supervisor = request.data.get('supervisor')
             if 'thesis_url' in request.data:
                 user.thesis_url = request.data.get('thesis_url')
+            if 'title_of_thesis' in request.data:
+                user.title_of_thesis = request.data.get('title_of_thesis')
             if 'status' in request.data:
                 user.status = request.data.get('status')    
             if 'comments_by_indian' in request.data:
                 user.comments_by_indian = request.data.get('comments_by_indian')
             if 'comments_by_foreign' in request.data:
                 user.comments_by_foreign = request.data.get('comments_by_foreign')
+            if 'indian_examiner_id' in request.data:
+                indian_examiner=Examiner.objects.get(pk=request.data.get('indian_examiner_id'))
+                user.indian_examiner = indian_examiner
+            if 'foreign_examiner_id' in request.data:
+                foreign_examiner=Examiner.objects.get(pk=request.data.get('foreign_examiner_id'))
+                user.foreign_examiner = foreign_examiner
+            
             user.save()
             return send_response(result=True, message="User updated successfully")
         except Exception as e:
             return send_response(result=False, message=str(e))
 
-# class examinerView(APIView):
-#     permission_classes = [IsAuthenticated]
+class examinerView(APIView):
+    permission_classes = [IsAuthenticated]
 
-#     def get(self, request):
-#         try:
-#             # examiners = Examiner.objects.filter(is_assigned=False)
-#             indians = Examiner.objects.filter(is_indian=True)
-#             foreigners = Examiner.objects.filter(is_indian=False)
-#             return send_response(result=True, data={'indian': ExaminerSerializer(indians, many=True).data, 'foreign': ExaminerSerializer(foreigners, many=True).data})
-#             # return send_response(result=True, data=ExaminerSerializer(examiners, many=True).data)
-#         except Exception as e:
-#             return send_response(result=False, message=str(e))
+    def get(self, request):
+        try:
+            # examiners = Examiner.objects.filter(is_assigned=False)
+            indians = Examiner.objects.filter(is_indian=True)
+            foreigners = Examiner.objects.filter(is_indian=False)
+            return send_response(result=True, data={'indian': ExaminerSerializer(indians, many=True).data, 'foreign': ExaminerSerializer(foreigners, many=True).data})
+            # return send_response(result=True, data=ExaminerSerializer(examiners, many=True).data)
+        except Exception as e:
+            return send_response(result=False, message=str(e))
         
-#     def patch(self,request,pk):
-#         try:
-#             if not Examiner.objects.filter(pk=pk).exists():
-#                 return send_response(result=False, message="Examiner does not exist")
-#             examiner = Examiner.objects.get(pk=pk)
-#             if 'is_assigned' in request.data:
-#                 examiner.is_assigned = request.data.get('is_assigned')
-#             examiner.save()
-#             return send_response(result=True, message="Examiner updated successfully")
-#         except Exception as e:
-#             return send_response(result=False, message=str(e))
+    # def patch(self,request,pk):
+    #     try:
+    #         if not Examiner.objects.filter(pk=pk).exists():
+    #             return send_response(result=False, message="Examiner does not exist")
+    #         examiner = Examiner.objects.get(pk=pk)
+    #         if 'is_assigned' in request.data:
+    #             examiner.is_assigned = request.data.get('is_assigned')
+    #         examiner.save()
+    #         return send_response(result=True, message="Examiner updated successfully")
+    #     except Exception as e:
+    #         return send_response(result=False, message=str(e))
+    def post(self,request):
+        try:
+            serializer = ExaminerSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return send_response(result=true, message="Examiner created successfully")
+        except Exception as e:
+            return send_response(result=False, message=str(e))
         
 class form1AView(APIView):
     permission_classes = [IsAuthenticated]

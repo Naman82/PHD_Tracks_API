@@ -10,8 +10,8 @@ urlpatterns = [
     path('login/',loginView.as_view(),name="loginView"),
     path('token-refresh/', TokenRefreshView.as_view(), name='token-refresh'),
 
-    # path('examiner/list/',examinerView.as_view(),name='examinerView'),
-    # path('examiner/<int:pk>/update/',examinerView.as_view(),name='examinerView-update'),
+    path('examiner/',examinerView.as_view(),name='examinerView'),
+    # path('examiner/<int:pk>/',examinerView.as_view(),name='examinerViewGet'),
     path('user/list/',userListView.as_view(),name='userView-list'),
     path('user/<int:pk>/',userDetailsView.as_view(),name='userView-detail'),
     path('user/<int:pk>/update/',userDetailsView.as_view(),name='userView-update'),
