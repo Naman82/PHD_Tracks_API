@@ -282,6 +282,8 @@ class DSCCommitteeView(APIView):
             if serializer.is_valid():
                 serializer.save()
                 return send_response(result=True, message="Committee member created successfully")
+            else:
+                return send_response(result=False, message=str(serializer))
         except Exception as e:
             return send_response(result=False, message=str(e))
 

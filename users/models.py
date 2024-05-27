@@ -26,7 +26,8 @@ class Examiner(models.Model):
         return str(self.name)
     
 class DSCCommittee(models.Model):
-    name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     email = models.EmailField()
     designation = models.CharField(max_length=255,null=True,blank=True)
     institute = models.TextField()
@@ -35,7 +36,7 @@ class DSCCommittee(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.name)
+        return str(self.first_name)
 
 class User(AbstractUser):
 
