@@ -14,8 +14,8 @@ class ExaminerSerializer(serializers.ModelSerializer):
 
 class DscCommitteeSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
-        fields = ['id', 'first_name', 'last_name', 'email']
+        model = DSCCommittee
+        fields = '__all__'
         
 class UserSerializer(serializers.ModelSerializer):
     supervisor=SupervisorSerializer()

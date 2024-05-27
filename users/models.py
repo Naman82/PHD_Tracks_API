@@ -13,6 +13,7 @@ class Examiner(models.Model):
     name = models.CharField(max_length=255)
     designation = models.CharField(max_length=255,null=True,blank=True)
     institute = models.TextField()
+    profile_url = models.URLField(null=True,blank=True)
     # priority = models.IntegerField(validators=[MaxValueValidator(100)])
     # is_assigned = models.BooleanField(default=False)
     # areas_of_interest = models.TextField()
@@ -20,6 +21,18 @@ class Examiner(models.Model):
     # phone = models.CharField(max_length=13)
     is_indian = models.BooleanField(default=True)
     email = models.EmailField()
+
+    def __str__(self):
+        return str(self.name)
+    
+class DSCCommittee(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    designation = models.CharField(max_length=255,null=True,blank=True)
+    institute = models.TextField()
+    profile_url = models.URLField(null=True,blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return str(self.name)
@@ -50,7 +63,7 @@ class User(AbstractUser):
     designation = models.CharField(max_length=255,null=True,blank=True)
     # supervisor = models.CharField(max_length=255,null=True,blank=True)
     supervisor = models.ForeignKey('self',on_delete=models.CASCADE,null=True,blank=True)
-    dsc_committee = models.ManyToManyField('self',null=True,blank=True)
+    dsc_committee = models.ManyToManyField(DSCCommittee,null=True,blank=True)
     status = models.CharField(max_length=255,null=True,blank=True)
     thesis_url = models.URLField(null=True,blank=True)
 
